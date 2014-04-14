@@ -16,7 +16,8 @@ class ChatController < WebsocketRails::BaseController
   end
 
   def private_msg(ev, msg)
-    WebsocketRails[:channel].trigger(ev, {
+    channel = msg[:channel_name].to_sym
+    WebsocketRails[channel].trigger(ev, {
         user_name: current_user.email,
         received: Time.now.to_s(:short),
         msg_body: msg[:msg_body]

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   get "public/index"
-  root to: "public#index"
+  root to: "conversations#index"
+  resources :conversations, only: [:show, :index]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
