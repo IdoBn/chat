@@ -7,7 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<% if current_user %>
+	<strong>signed in as <%= current_user.email %></strong>
+	<%= link_to "sing out", destroy_user_session_path, method: :delete  %>
+<% else %>
+	<%= link_to "sing in", new_user_session_path  %>
+	<%= link_to "sing up", new_user_registration_path %>
+<% end %> <!-- if -->
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 <%= yield %>
 
 </body>

@@ -29,7 +29,7 @@ jQuery(function() {
   }
 
   function messageTemplate(message) {
-    return "<div class='message' ><label class='label label-info'>[" + message.received + "] " + message.user_name +"</label>&nbsp;"+ message.msg_body +"</div>";
+    return "<div class='message' ><label class='label label-info'>[" + message.received + "] " + message.user_name +"</label>&nbsp;: "+ message.msg_body +"</div>";
   }
 
   function shifMessageQueue() {
