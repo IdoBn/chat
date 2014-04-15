@@ -1,7 +1,7 @@
 class ChatController < WebsocketRails::BaseController
   include ActionView::Helpers::SanitizeHelper
 
-  before_action :authenticate_user!
+  before_action :check_user
 
   def initialize_session
     puts "Session Initialized\n"
@@ -39,4 +39,14 @@ class ChatController < WebsocketRails::BaseController
     private_msg "client #{client_id} disconnected"
     broadcast_user_list
   end
+
+  private
+    def check_user
+      @conversation = Conversation.where(name: message[:channel_name]).first
+      unless @conversation.users.include? current_user
+        puts 'unautherized'
+        render :nothing => true, :status => 401
+      end
+    end
 end
+
